@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBotApp", "TelegramBotApp\TelegramBotApp.csproj", "{7E87B86F-4484-42BE-80D6-624C1FB06519}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.App", "TelegramBotApp\TelegramBot.App.csproj", "{7E87B86F-4484-42BE-80D6-624C1FB06519}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
