@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.App", "TelegramBotApp\TelegramBot.App.csproj", "{7E87B86F-4484-42BE-80D6-624C1FB06519}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.App", "TelegramBot.App\TelegramBot.App.csproj", "{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7E87B86F-4484-42BE-80D6-624C1FB06519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E87B86F-4484-42BE-80D6-624C1FB06519}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E87B86F-4484-42BE-80D6-624C1FB06519}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E87B86F-4484-42BE-80D6-624C1FB06519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
