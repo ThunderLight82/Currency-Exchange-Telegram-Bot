@@ -1,4 +1,4 @@
-﻿namespace TelegramBot.App.Models;
+﻿namespace TelegramBot.Models;
 
 public class Currency
 {
@@ -8,9 +8,9 @@ public class Currency
         CurrencyEmoji = emoji;
     }
     
-    public string CurrencyNameCode { get; set; }
+    public string CurrencyNameCode { get; }
 
-    public string CurrencyEmoji { get; set; }
+    public string CurrencyEmoji { get; }
     
     public override string ToString()
     {
