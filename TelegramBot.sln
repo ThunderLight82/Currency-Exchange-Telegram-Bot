@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.App", "TelegramBotApp\TelegramBot.App.csproj", "{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Services", "TelegramBot.Services\TelegramBot.Services.csproj", "{476E44D1-EA1A-4C84-AD20-1BC727417252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Models", "TelegramBot.Models\TelegramBot.Models.csproj", "{93FD27E6-1845-47D8-AA8E-A855945FA38A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.UnitTests", "TelegramBot.UnitTests\TelegramBot.UnitTests.csproj", "{A4A1B837-CE9A-4E7F-8F58-6D8618871A41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{476E44D1-EA1A-4C84-AD20-1BC727417252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476E44D1-EA1A-4C84-AD20-1BC727417252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476E44D1-EA1A-4C84-AD20-1BC727417252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476E44D1-EA1A-4C84-AD20-1BC727417252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93FD27E6-1845-47D8-AA8E-A855945FA38A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93FD27E6-1845-47D8-AA8E-A855945FA38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93FD27E6-1845-47D8-AA8E-A855945FA38A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93FD27E6-1845-47D8-AA8E-A855945FA38A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4A1B837-CE9A-4E7F-8F58-6D8618871A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4A1B837-CE9A-4E7F-8F58-6D8618871A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4A1B837-CE9A-4E7F-8F58-6D8618871A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4A1B837-CE9A-4E7F-8F58-6D8618871A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

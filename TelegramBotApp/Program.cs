@@ -1,43 +1,34 @@
-﻿using Microsoft.Extensions.Configuration;
-using Telegram.Bot;
-using Telegram.Bot.Types;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Telegram.Bot.Polling;
+using TelegramBot.Models;
+using TelegramBot.Services;
+using TelegramBot.Services.ServiceExtensions;
 
 namespace TelegramBot.App;
 
-class Program
+public abstract class Program
 {
-    static async Task Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        var config = new ConfigurationBuilder().
-            SetBasePath(AppContext.BaseDirectory).
-            AddJsonFile("appsetings.json").
-            Build();
+        using var host = CreateDefaultBuilder(args).Build();
+        
+        Console.WriteLine("\nBot is started...\n");
+        
+        await host.RunAsync();
+    }
 
-        var tBotToken = config.GetSection("BotConfiguration")["TBotToken"];
-        
-        var client = new TelegramBotClient(tBotToken);
-        client.StartReceiving(UpdateMessage, ErrorEvent);
-        
-        Console.WriteLine("Bot is started...");
-        
-        while (true)
+    private static IHostBuilder CreateDefaultBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args).ConfigureServices((context, services) =>
         {
-            await Task.Delay(1000);
-        }
-    }
-    
-    private static async Task UpdateMessage(ITelegramBotClient botClient, Update update, CancellationToken token)
-    {
-        var message = update.Message;
+            services.Configure<BotConfiguration>(context.Configuration.GetSection("BotConfiguration"));
 
-        if (message.Text == "Test")
-        {
-            await botClient.SendTextMessageAsync(message.Chat.Id, "Пшел вон");
-        }
-    }
-    
-    private static async Task ErrorEvent (ITelegramBotClient tBotClient, Exception ex, CancellationToken token)
-    {
-        Console.WriteLine("An error occurred: " + ex.Message);
-    }
+            services.InitializeTelegramBotClient();
+            
+            services.AddScoped<IUpdateHandler, UpdateHandlerService>();
+            services.AddScoped<ICurrencyService, CurrencyService>();
+            services.AddScoped<IReceiverService, ReceiverService>();
+            
+            services.AddHostedService<ProgramExtensions>();
+        });
 }
