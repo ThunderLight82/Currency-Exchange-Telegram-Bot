@@ -3,8 +3,8 @@
 namespace TelegramBot.Services;
 
 public interface ICurrencyService
-{
-    public Task<Currency[]> GetAllCurrencies();
+{ 
+    Task<Currency[]> GetAllCurrencies();
 
-    public Task<decimal> GetExchangeRateAsync(string currencyCode, DateTime? dateTime);
+    Task<decimal> ExchangeRateOperationAsync(string currencyCode, string dateString);
 }

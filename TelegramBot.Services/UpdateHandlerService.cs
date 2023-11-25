@@ -100,10 +100,11 @@ public class UpdateHandlerService : IUpdateHandler
     {
         // Parse and convert user message to uppercase because further exchange logic.
         var userMessage = message.Text?.ToUpper();
+        
         var (currencyNameCode, dateTime) = ParseUserMessageWithCurrencyAndDate(userMessage);
 
         await GetAndSendExchangeRateResponseAsync(message, currencyNameCode,
-            dateTime, _currencyService.GetExchangeRateAsync, token);
+            dateTime, _currencyService.ExchangeRateOperationAsync, token);
     }
     
     #endregion
@@ -160,7 +161,7 @@ public class UpdateHandlerService : IUpdateHandler
     
     // Retrieves the exchange rate and sends the result as a message.
     private async Task GetAndSendExchangeRateResponseAsync(Message message, string currencyNameCode,
-            DateTime? dateTime, Func<string, DateTime?, Task<decimal>> exchangeRateFunction, CancellationToken token)
+            DateTime? dateTime, Func<string, string, Task<decimal>> exchangeRateFunction, CancellationToken token)
     {
         var getCurrencies = await _currencyService.GetAllCurrencies();
         
@@ -168,7 +169,7 @@ public class UpdateHandlerService : IUpdateHandler
         {
             if (DateIsWithinBankArchiveRange(dateTime.Value))
             {
-                decimal exchangeRate = await exchangeRateFunction(currencyNameCode, dateTime);
+                decimal exchangeRate = await exchangeRateFunction(currencyNameCode, GetDateString(dateTime));
             
                 var currency = getCurrencies.FirstOrDefault(c => c.CurrencyNameCode == currencyNameCode);
 
@@ -239,6 +240,11 @@ public class UpdateHandlerService : IUpdateHandler
         var validDateCheck = currentDate.AddYears(-7);
 
         return dateTime >= validDateCheck && dateTime <= currentDate;
+    }
+    
+    private string GetDateString(DateTime? dateTime)
+    {
+        return dateTime?.ToString("dd.MM.yyyy") ?? DateTime.Now.ToString("dd.MM.yyyy");
     }
     
     #endregion

@@ -12,8 +12,8 @@ public class CurrencyService : ICurrencyService
     
     public CurrencyService(IHttpClientFactory factory, IOptions<BotConfiguration> botConfiguration)
     {
-        _botConfiguration = botConfiguration.Value;
         _client = factory.CreateClient("Privat24Client");
+        _botConfiguration = botConfiguration.Value;
     }
     
     // Array of all supported currencies in Privat24Archive API.
@@ -34,24 +34,15 @@ public class CurrencyService : ICurrencyService
     {
         return Task.FromResult(_currencies);
     }
-
-    public async Task<decimal> GetExchangeRateAsync(string currencyCode, DateTime? dateTime)
-    {
-        var dateString = dateTime.HasValue ?
-            dateTime.Value.ToString("dd.MM.yyyy") : DateTime.Now.ToString("dd.MM.yyyy");
-        
-        return await ExchangeRateOperationAsync(currencyCode, dateString);
-    }
     
     // Core logic for getting exchange rate from .JSON by converting it.
-    private async Task<decimal> ExchangeRateOperationAsync(string currencyCode, string dateString)
+    public async Task<decimal> ExchangeRateOperationAsync(string currencyCode, string dateString)
     {
+        if (string.IsNullOrEmpty(currencyCode) || string.IsNullOrEmpty(dateString))
+            throw new ArgumentNullException(string.IsNullOrEmpty(currencyCode) ?
+                nameof(currencyCode) : nameof(dateString));
         try
         { 
-            if (string.IsNullOrEmpty(currencyCode) || string.IsNullOrEmpty(dateString))
-                throw new ArgumentNullException(string.IsNullOrEmpty(currencyCode) ?
-                    nameof(currencyCode) : nameof(dateString));
-            
             // Get third-party bank API url and fill with date.
             var apiUrl = $"{_botConfiguration.PrivatBankApiUrl}&date={dateString}";
 
@@ -72,11 +63,12 @@ public class CurrencyService : ICurrencyService
                 }
             }
             
-            throw new InvalidOperationException($"Exchange rate not found in archive for currency code: {currencyCode}");
+            throw new InvalidOperationException($"Exchange rate not found in archive for currency code " +
+                                                $"or date string was not in a correct format: {currencyCode}");
         }
         catch (HttpRequestException ex)
         {
-            throw new HttpRequestException($"HTTP request failed: {ex.Message}", ex);
+            throw new HttpRequestException($"HTTP request failed. Date string was not in a correct format: {ex.Message}", ex);
         }
         catch (JsonException ex)
         {
@@ -84,7 +76,7 @@ public class CurrencyService : ICurrencyService
         }
         catch (Exception ex)
         {
-            throw new Exception($"An unexpected error occurred: {ex.Message}", ex);
+            throw new InvalidOperationException($"An unexpected error occurred: {ex.Message}", ex);
         }
     }
 }
