@@ -2,5 +2,5 @@
 
 public interface IReceiverService
 {
-    public Task ReceiveAsync(CancellationToken token);
+    Task ReceiveAsync(CancellationToken token);
 }

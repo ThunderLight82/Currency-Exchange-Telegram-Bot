@@ -10,7 +10,7 @@ using TelegramBot.Models;
 namespace TelegramBot.Services;
 
 // This service is responsible for handling incoming updates from the Telegram Bot API and processing messages from users. 
-public class UpdateHandlerService : IUpdateHandler
+public class UpdateHandlerService : IUpdateHandlerService, IUpdateHandler
 {
     private readonly ITelegramBotClient _botClient;
     private readonly ICurrencyService _currencyService;
@@ -60,7 +60,7 @@ public class UpdateHandlerService : IUpdateHandler
         }
     }
     
-    private Task HandleUnknownUpdate(Update update)
+    public Task HandleUnknownUpdate(Update update)
     {
         Console.WriteLine($"Received an unknown update type: {update.Type}");
         
@@ -68,7 +68,7 @@ public class UpdateHandlerService : IUpdateHandler
     }
 
     // Handles different input messages.
-    private async Task HandleMessageReceivedAsync(Message message, CancellationToken token)
+    public async Task HandleMessageReceivedAsync(Message message, CancellationToken token)
     {
         if (message.Type == MessageType.Text)
         {
@@ -83,20 +83,20 @@ public class UpdateHandlerService : IUpdateHandler
                     await SupportedCurrencyListResponseAsync(message, token);
                     break;
 
-                // Handle exchange rate inputs.
+                // Handle exchange rate inputs if user message contain any currency code.
                 default:
                     await HandleCurrencyCommandsAsync(message, token);
                     break;
             }
         }
-        // Handle case when message type is not text.
+        // Handle case when message type is not text or null.
         else
         {
             await UnsupportedMessageTypeResponseAsync(message, token);
         }
     }
     
-    private async Task HandleCurrencyCommandsAsync(Message message, CancellationToken token)
+    public async Task HandleCurrencyCommandsAsync(Message message, CancellationToken token)
     {
         // Parse and convert user message to uppercase because further exchange logic.
         var userMessage = message.Text?.ToUpper();
@@ -112,7 +112,7 @@ public class UpdateHandlerService : IUpdateHandler
     #region ResponseMessages
 
     // Response [/start] input.
-    private async Task StartResponseAsync(Message message, CancellationToken token)
+    public async Task StartResponseAsync(Message message, CancellationToken token)
     {
         await _botClient.SendChatActionAsync(message.Chat.Id, ChatAction.Typing,
             cancellationToken: token);
@@ -131,7 +131,7 @@ public class UpdateHandlerService : IUpdateHandler
     }
 
     // Another message right after [/start] message for additional help.
-    private async Task SupportedCurrencyListResponseAsync(Message message, CancellationToken token)
+    public async Task SupportedCurrencyListResponseAsync(Message message, CancellationToken token)
     {
         var currencyList = await _currencyService.GetAllCurrencies();
 
@@ -150,7 +150,7 @@ public class UpdateHandlerService : IUpdateHandler
     }
     
     // Response to non-text input messages.
-    private async Task UnsupportedMessageTypeResponseAsync(Message message, CancellationToken token)
+    public async Task UnsupportedMessageTypeResponseAsync(Message message, CancellationToken token)
     {
         var unsupportedMessageType = "*Unsupported message type. *" + 
                                      "*Please, send a valid message that contains currency code with or without date.*";
@@ -160,7 +160,7 @@ public class UpdateHandlerService : IUpdateHandler
     }
     
     // Retrieves the exchange rate and sends the result as a message.
-    private async Task GetAndSendExchangeRateResponseAsync(Message message, string currencyNameCode,
+    public async Task GetAndSendExchangeRateResponseAsync(Message message, string currencyNameCode,
             DateTime? dateTime, Func<string, string, Task<decimal>> exchangeRateFunction, CancellationToken token)
     {
         var getCurrencies = await _currencyService.GetAllCurrencies();
@@ -209,7 +209,7 @@ public class UpdateHandlerService : IUpdateHandler
 
     #region Other
 
-    // Date parsing from users messages. If no date is specified in message - set today's date instead of throwing error. 
+    // Date parsing from users messages. If no date is specified or it's typed inaccurate in message - set today's date instead of throwing error. 
     private (string currencyCode, DateTime? date) ParseUserMessageWithCurrencyAndDate(string userMessage)
     {
         // The regex expects a string in the format: [CurrencyCode] [Optional: (DD.MM.YYYY) or (DD/MM/YYYY)]
@@ -227,13 +227,13 @@ public class UpdateHandlerService : IUpdateHandler
             _ => (string.Empty, null)
         };
     }
-    
+
     private static bool CurrencyCodeIsValid(string currencyCode, IEnumerable<Currency> currencies)
     {
         return currencies.Any(c => c.CurrencyNameCode == currencyCode);
     }
 
-    // Check if the date is within the valid range (Bank api holds up to 7 years of data from today's date).
+    // Check if the date is within the valid range. Bank api holds up to 7-9 years of data from today's date, but I use 7.
     private static bool DateIsWithinBankArchiveRange(DateTime dateTime)
     {
         var currentDate = DateTime.Now;
@@ -241,8 +241,8 @@ public class UpdateHandlerService : IUpdateHandler
 
         return dateTime >= validDateCheck && dateTime <= currentDate;
     }
-    
-    private string GetDateString(DateTime? dateTime)
+
+    private static string GetDateString(DateTime? dateTime)
     {
         return dateTime?.ToString("dd.MM.yyyy") ?? DateTime.Now.ToString("dd.MM.yyyy");
     }
