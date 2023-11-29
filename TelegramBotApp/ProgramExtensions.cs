@@ -5,7 +5,6 @@ using TelegramBot.Services;
 namespace TelegramBot.App;
 
 // Background extension class with method that run loop to accept user messages  
-
 public class ProgramExtensions : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;

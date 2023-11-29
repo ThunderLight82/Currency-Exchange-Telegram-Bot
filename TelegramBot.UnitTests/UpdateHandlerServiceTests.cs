@@ -19,7 +19,8 @@ public class UpdateHandlerServiceTests
         
         _updateHandlerService = new Mock<IUpdateHandlerService>();
     }
-
+    
+    // Не совсем валидные тесты как мне кажется, но другое я пока не придумал.
     [Fact]
     public async Task HandleUpdateAsync_MessageUpdate_CallsHandleMessageReceivedAsync()
     {
@@ -138,7 +139,7 @@ public class UpdateHandlerServiceTests
             upd.UnsupportedMessageTypeResponseAsync(testMessage, It.IsAny<CancellationToken>()), Times.Never);
     }
     
-    // Попытка собрать немного иначе Аррендж
+    // Попытка собрать немного иначе Аррендж. Неуспешная.
     [Fact]
     public async Task HandleMessageReceivedAsync_StartOrHelpCommand_CallsStartAndSupportedCurrencyListResponses()
     {

@@ -212,7 +212,7 @@ public class UpdateHandlerService : IUpdateHandlerService, IUpdateHandler
     // Date parsing from users messages. If no date is specified or it's typed inaccurate in message - set today's date instead of throwing error. 
     private (string currencyCode, DateTime? date) ParseUserMessageWithCurrencyAndDate(string userMessage)
     {
-        // The regex expects a string in the format: [CurrencyCode] [Optional: (DD.MM.YYYY) or (DD/MM/YYYY)]
+        // Regex format: [CurrencyCode] [Optional: (DD.MM.YYYY) or (DD/MM/YYYY)]
         var regex = new Regex(@"^(\w+)\s*(\d{2}[./]\d{2}[./]\d{4})?$");
         var match = regex.Match(userMessage);
 

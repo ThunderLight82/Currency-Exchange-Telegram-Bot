@@ -63,8 +63,9 @@ public class CurrencyService : ICurrencyService
                 }
             }
             
-            throw new InvalidOperationException($"Exchange rate not found in archive for currency code " +
-                                                $"or date string was not in a correct format: {currencyCode}");
+            throw new InvalidOperationException($"Exchange rate not found in archive for currency code:" +
+                                                $" {currencyCode} " +
+                                                "or date string was not in a correct format");
         }
         catch (HttpRequestException ex)
         {
