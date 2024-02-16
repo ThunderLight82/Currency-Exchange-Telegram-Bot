@@ -1,6 +1,6 @@
 ﻿using TelegramBot.Models;
 
-namespace TelegramBot.Services;
+namespace TelegramBot.Services.Interfaces;
 
 public interface ICurrencyService
 { 

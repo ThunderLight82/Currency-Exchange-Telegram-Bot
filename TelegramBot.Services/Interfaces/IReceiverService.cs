@@ -1,4 +1,4 @@
-﻿namespace TelegramBot.Services;
+﻿namespace TelegramBot.Services.Interfaces;
 
 public interface IReceiverService
 {

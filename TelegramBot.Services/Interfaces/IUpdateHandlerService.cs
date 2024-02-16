@@ -1,7 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace TelegramBot.Services;
+namespace TelegramBot.Services.Interfaces;
 
 public interface IUpdateHandlerService
 {
