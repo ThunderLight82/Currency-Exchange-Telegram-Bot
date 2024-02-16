@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using TelegramBot.Services.Interfaces;
 
-namespace TelegramBot.App;
+namespace TelegramBot.BotApp;
 
 // Background extension class with method that run loop to accept user messages  
 public class ProgramExtensions : BackgroundService

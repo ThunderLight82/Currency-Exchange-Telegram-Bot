@@ -6,7 +6,7 @@ using TelegramBot.Services;
 using TelegramBot.Services.Interfaces;
 using TelegramBot.Services.ServiceExtensions;
 
-namespace TelegramBot.App;
+namespace TelegramBot.BotApp;
 
 public abstract class Program
 {
