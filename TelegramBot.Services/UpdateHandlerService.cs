@@ -6,6 +6,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using TelegramBot.Models;
+using TelegramBot.Services.Interfaces;
 
 namespace TelegramBot.Services;
 

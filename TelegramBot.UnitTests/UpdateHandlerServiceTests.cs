@@ -2,6 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using TelegramBot.Services;
+using TelegramBot.Services.Interfaces;
 using Xunit;
 
 namespace TelegramBot.UnitTests;

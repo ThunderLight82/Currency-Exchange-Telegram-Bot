@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using TelegramBot.Models;
 using TelegramBot.Services;
+using TelegramBot.Services.Interfaces;
 using Xunit;
 
 namespace TelegramBot.UnitTests;
@@ -42,8 +43,6 @@ public class CurrencyServiceTests
         Assert.Equal(expectedExchangeRateResult, exchangeResult, precision: 2);
     }
     
-    // Скорее всего абстрактный тест. Огромная часть если не все эти ошибки никогда не будет закетчены в при реальной работе бота.
-    // UpdateHandlerService не даст большой части их дойти в этот метод, но оставлю их все-равно на всякий.
     [Theory]
     [InlineData("USD", "99.99.2099", typeof(HttpRequestException))]
     [InlineData("EUR", "00.01.0120", typeof(HttpRequestException))]

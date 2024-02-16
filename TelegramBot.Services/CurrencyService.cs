@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using TelegramBot.Models;
+using TelegramBot.Services.Interfaces;
 
 namespace TelegramBot.Services;
 
