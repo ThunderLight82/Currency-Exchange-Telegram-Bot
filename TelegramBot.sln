@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.App", "TelegramBotApp\TelegramBot.App.csproj", "{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.App", "TelegramBot.App\TelegramBot.App.csproj", "{9BBA322D-0459-483C-8D4B-AD5321A1C0A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Services", "TelegramBot.Services\TelegramBot.Services.csproj", "{476E44D1-EA1A-4C84-AD20-1BC727417252}"
 EndProject
