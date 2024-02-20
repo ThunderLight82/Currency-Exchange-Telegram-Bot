@@ -36,7 +36,7 @@ public class CurrencyService : ICurrencyService
         return Task.FromResult(_currencies);
     }
     
-    // Core logic for getting exchange rate from .JSON by converting it.
+    // Core logic for getting exchange rate from .json by converting it.
     public async Task<decimal> ExchangeRateOperationAsync(string currencyCode, string dateString)
     {
         if (string.IsNullOrEmpty(currencyCode) || string.IsNullOrEmpty(dateString))
