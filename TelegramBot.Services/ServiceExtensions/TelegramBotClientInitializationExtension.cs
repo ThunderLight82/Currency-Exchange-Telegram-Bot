@@ -16,7 +16,7 @@ public static class TelegramBotClientInitializationExtension
             if (string.IsNullOrWhiteSpace(botClientConfig?.BotToken))
                 Console.WriteLine("Bot token is missing or empty. Please, check the configuration.");
 
-            return new TelegramBotClient(new TelegramBotClientOptions(botClientConfig?.BotToken), httpClient);
+            return new TelegramBotClient(new TelegramBotClientOptions(botClientConfig?.BotToken!), httpClient);
         });
     }
 }
