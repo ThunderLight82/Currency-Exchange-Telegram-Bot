@@ -1,6 +1,6 @@
-# "Currency Exchange" Telegram Bot Project
+# "Currency Exchange" Project
 
-The Console App project sends currency exchange rates to clients by date via the Telegram API, converting foreign currency to Ukrainian hryvnia. It utilizes a "PrivatBank" public API for accurate rate/date data.
+The Console App Telegram Bot project sends currency exchange rates to clients by date via the Telegram API, converting foreign currency to Ukrainian hryvnia. It utilizes a "PrivatBank" public API for accurate rate/date data.
 
 ## Tech Stack
 
