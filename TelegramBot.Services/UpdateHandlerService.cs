@@ -161,7 +161,7 @@ public class UpdateHandlerService : IUpdateHandlerService, IUpdateHandler
     }
     
     // Retrieves the exchange rate and sends the result as a message.
-    public async Task GetAndSendExchangeRateResponseAsync(Message message, string currencyNameCode,
+    private async Task GetAndSendExchangeRateResponseAsync(Message message, string currencyNameCode,
             DateTime? dateTime, Func<string, string, Task<decimal>> exchangeRateFunction, CancellationToken token)
     {
         var getCurrencies = await _currencyService.GetAllCurrencies();
@@ -187,7 +187,7 @@ public class UpdateHandlerService : IUpdateHandlerService, IUpdateHandler
                     "Invalid date. The provided date is beyond the allowed range.\n" +
                     "Please, use a date within the last *7 years* from today.";
                 
-                _botClient.SendTextMessageAsync(message.Chat.Id, dateOutOfRangeErrorMessage, parseMode: ParseMode.Markdown,
+                await _botClient.SendTextMessageAsync(message.Chat.Id, dateOutOfRangeErrorMessage, parseMode: ParseMode.Markdown,
                     cancellationToken: token);
             }
             
